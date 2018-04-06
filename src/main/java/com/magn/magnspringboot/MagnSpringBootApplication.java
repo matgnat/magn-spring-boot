@@ -9,41 +9,42 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class MagnSpringBootApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MagnSpringBootApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MagnSpringBootApplication.class, args);
+    }
 
 
-	class Message {
+    class Message {
 
-		private final String message;
+        private final String message;
 
-		public Message(String message) {
-			this.message = message;
-		}
+        public Message(String message) {
+            this.message = message;
+        }
 
-		public String getMessage() {
-			return message;
-		}
+        public String getMessage() {
+            return message;
+        }
 
-		@Override
-		public String toString() {
-			return "Message{" +
-					"message='" + message + '\'' +
-					'}';
-		}
+        @Override
+        public String toString() {
+            return "Message{" +
+                    "message='" + message + '\'' +
+                    '}';
+        }
 
-	}
+    }
 
-	@RestController
-	class Resources {
+    @RestController
+    class Resources {
 
-		@RequestMapping( method = RequestMethod.GET)
-		public Message getMessage() {
-			return new Message("HOLAAAA");
-		}
-	}
-
+        @RequestMapping(
+                method = RequestMethod.GET
+        )
+        public Message getMessage() {
+            return new Message("HOLAAAA");
+        }
+    }
 
 
 }
