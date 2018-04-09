@@ -16,12 +16,12 @@ public class FakeDataDao implements UserDao{
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> selectAllUsers() {
         return new ArrayList<>(database.values());
     }
 
     @Override
-    public User getUser(UUID userID) {
+    public User selectUserByUserUid(UUID userID) {
         return database.get(userID);
     }
 
@@ -32,7 +32,7 @@ public class FakeDataDao implements UserDao{
     }
 
     @Override
-    public int removeUser(UUID userUid) {
+    public int deleteUserByUserUid(UUID userUid) {
         database.remove(userUid);
         return 1;
     }
