@@ -60,7 +60,7 @@ public class User {
                 '}';
     }
 
-    enum Gender {
+    public enum Gender {
         MAIL,
         FEMAIL
     }
