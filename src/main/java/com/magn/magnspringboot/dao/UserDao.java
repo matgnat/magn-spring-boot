@@ -3,6 +3,7 @@ package com.magn.magnspringboot.dao;
 import com.magn.magnspringboot.model.User;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -12,7 +13,7 @@ public interface UserDao {
 
     List<User> selectAllUsers();
 
-    User selectUserByUserUid(UUID userID);
+    Optional<User> selectUserByUserUid(UUID userID);
 
     int updateUser(User user);
 

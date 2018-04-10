@@ -5,13 +5,10 @@ import com.magn.magnspringboot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserService {
-
 
     private UserDao userDao;
 
@@ -21,22 +18,33 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return null;
+        return userDao.selectAllUsers();
     }
 
-    public User getUser(UUID userID) {
-        return null;
+    public Optional<User> getUser(UUID userID) {
+        return userDao.selectUserByUserUid(userID);
     }
 
     public int updateUser(User user) {
-        return 1;
+        Optional<User> userOptional = getUser(user.getUserID());
+        if (userOptional.isPresent()) {
+            userDao.updateUser(user);
+            return 1;
+        }
+        return -1;
     }
 
     public int removeUser(UUID userUid) {
-        return 1;
+        Optional<User> userOptional = getUser(userUid);
+        if (userOptional.isPresent()) {
+            userDao.deleteUserByUserUid(userUid);
+            return 1;
+        }
+        return -1;
     }
 
-    public int insertUser(UUID userUid, User user) {
-        return 1;
+    public int insertUser(User user) {
+        UUID userUid = UUID.randomUUID();
+        return userDao.insertUser(userUid, user);
     }
 }
