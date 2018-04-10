@@ -7,16 +7,16 @@ import java.util.UUID;
  */
 public class User {
 
-    //userID
-    private final UUID userID;
+    //userUid
+    private final UUID userUid;
     private final String firstName;
     private final String lastName;
     private final Gender gender;
     private final Integer age;
     private final String email;
 
-    public User(UUID userID, String firstName, String lastName, Gender gender, Integer age, String email) {
-        this.userID = userID;
+    public User(UUID userUid, String firstName, String lastName, Gender gender, Integer age, String email) {
+        this.userUid = userUid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -24,8 +24,8 @@ public class User {
         this.email = email;
     }
 
-    public UUID getUserID() {
-        return userID;
+    public UUID getUserUid() {
+        return userUid;
     }
 
     public String getFirstName() {
@@ -51,7 +51,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userID=" + userID +
+                "userUid=" + userUid +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
