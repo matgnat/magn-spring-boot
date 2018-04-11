@@ -3,12 +3,12 @@ package com.magn.magnspringboot.apicontroller;
 import com.magn.magnspringboot.model.User;
 import com.magn.magnspringboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -22,6 +22,7 @@ import java.util.UUID;
 public class UserApiController {
 
     private UserService userService;
+    private UserApiController userApiController;
 
     @Autowired
     public UserApiController(UserService userService) {
@@ -39,10 +40,26 @@ public class UserApiController {
             method = RequestMethod.GET,
             path = "{userUid}"
     )
-    public User fetchUser(@PathVariable("userUid") UUID userUid){
-        return userService.getUser(userUid).get();
-
+    public ResponseEntity<?> fetchUser(@PathVariable("userUid") UUID userUid){
+        Optional<User> userOptional = userService.getUser(userUid);
+        if (userOptional.isPresent()) {
+            return ResponseEntity.ok(userOptional.get());
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user " + userUid + " was not found");
     }
+
+    @RequestMapping(
+            method = RequestMethod.POST
+    )
+    public ResponseEntity<Integer> insertNewUser(User user) {
+        int result = userService.insertUser(user);
+        if (result == 1) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+
 
 
 
