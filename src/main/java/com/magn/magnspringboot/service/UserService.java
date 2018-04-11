@@ -1,5 +1,6 @@
 package com.magn.magnspringboot.service;
 
+import com.magn.magnspringboot.dao.FakeDataDao;
 import com.magn.magnspringboot.dao.UserDao;
 import com.magn.magnspringboot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,6 @@ public class UserService {
     }
 
     public int insertUser(User user) {
-        UUID userUid = UUID.randomUUID();
-        return userDao.insertUser(userUid, user);
+        return userDao.insertUser(UUID.randomUUID(), user);
     }
 }
