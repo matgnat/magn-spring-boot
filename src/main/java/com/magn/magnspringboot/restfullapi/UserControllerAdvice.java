@@ -1,7 +1,4 @@
-package com.magn.magnspringboot.apicontroller;
-
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.RestController;
+package com.magn.magnspringboot.restfullapi;
 
 /**
  * Created by magn on 4/11/2018.

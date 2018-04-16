@@ -1,4 +1,4 @@
-package com.magn.magnspringboot.apicontroller;
+package com.magn.magnspringboot.restfullapi;
 
 import com.magn.magnspringboot.model.User;
 import com.magn.magnspringboot.service.UserService;
