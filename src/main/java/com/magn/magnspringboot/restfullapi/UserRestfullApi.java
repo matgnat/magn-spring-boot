@@ -20,13 +20,12 @@ import java.util.UUID;
         path = "api/users"
 )
 
-public class UserApiController {
+public class UserRestfullApi {
 
     private UserService userService;
-    private UserApiController userApiController;
 
     @Autowired
-    public UserApiController(UserService userService) {
+    public UserRestfullApi(UserService userService) {
         this.userService = userService;
     }
 
