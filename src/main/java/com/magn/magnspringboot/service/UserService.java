@@ -2,6 +2,8 @@ package com.magn.magnspringboot.service;
 
 import com.magn.magnspringboot.dao.FakeDataDao;
 import com.magn.magnspringboot.dao.UserDao;
+import static com.magn.magnspringboot.model.User.Gender;
+
 import com.magn.magnspringboot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,21 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public List<User> getAllUsers() {
-        return userDao.selectAllUsers();
+
+
+
+    public List<User> getAllUsers(Optional<String> gender) {
+        List<User> users = userDao.selectAllUsers();
+        if (!gender.isPresent()) {
+            return users;
+        }
+        try {
+            Gender theGender = Gender.valueOf(gender.get());
+
+        } catch (Exception e) {
+             throw new IllegalStateException("invalid argument" + e);
+        }
+
     }
 
     public Optional<User> getUser(UUID userID) {
@@ -29,7 +44,7 @@ public class UserService {
 
     public int updateUser(User user) {
         Optional<User> userOptional = getUser(user.getUserUid());
-          if (userOptional.isPresent()) {
+        if (userOptional.isPresent()) {
             userDao.updateUser(user);
             return 1;
         }
