@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static java.util.UUID.randomUUID;
 
 @Service
 public class UserService {
@@ -47,6 +46,7 @@ public class UserService {
     }
 
     public int insertUser(User user) {
-        return userDao.insertUser(randomUUID(), user);
+        return userDao.insertUser(UUID.randomUUID(), user);
+
     }
 }
