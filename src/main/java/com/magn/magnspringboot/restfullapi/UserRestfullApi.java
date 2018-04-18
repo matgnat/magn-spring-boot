@@ -17,6 +17,7 @@ import java.util.UUID;
 /**
  * Created by magn on 4/10/2018.
  */
+
 @RestController
 @RequestMapping(
         path = "api/users"
@@ -34,7 +35,8 @@ public class UserRestfullApi {
 
     //TODO
     @RequestMapping(
-            method = RequestMethod.GET
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public List<User> fetchUsers(@QueryParam("gender") String gender) {
         return userService.getAllUsers(Optional.ofNullable(gender));
@@ -44,6 +46,7 @@ public class UserRestfullApi {
 
     @RequestMapping(
             method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE,
             path = "{userUid}"
     )
     public ResponseEntity<?> fetchUser(@PathVariable("userUid") UUID userUid) {
@@ -58,7 +61,8 @@ public class UserRestfullApi {
 
     @RequestMapping(
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Integer> insertNewUser(@RequestBody User user) {
         int result = userService.insertUser(user);
@@ -68,7 +72,8 @@ public class UserRestfullApi {
 
     @RequestMapping(
             method = RequestMethod.PUT,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Integer> updateUser(@RequestBody User user) {
         int result = userService.updateUser(user);
@@ -78,6 +83,7 @@ public class UserRestfullApi {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
             path = "{userUid}"
     )
     public ResponseEntity<Integer> deleteUser(@PathVariable("userUid") UUID userUid) {

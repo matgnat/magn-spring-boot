@@ -31,7 +31,7 @@ public class UserService {
             return users;
         }
         try {
-            Gender theGender = Gender.valueOf(gender.get());
+            Gender theGender = Gender.valueOf(gender.get().toUpperCase());
 /*            for (int i = 0; i < users.size(); i++) {
                 User user = users.get(i);
                 if (user.getGender().equals(theGender)) {
@@ -70,7 +70,9 @@ public class UserService {
     }
 
     public int insertUser(User user) {
-        return userDao.insertUser(UUID.randomUUID(), user);
+        UUID userUid = UUID.randomUUID();
+        //user.setUserUid(userUid);
+        return userDao.insertUser(userUid, User.newUser(userUid, user));
 
     }
 }

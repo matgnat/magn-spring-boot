@@ -1,5 +1,7 @@
 package com.magn.magnspringboot.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -9,14 +11,20 @@ import java.util.UUID;
 public class User {
 
     //userUid
-    private  UUID userUid;
-    private  String firstName;
-    private  String lastName;
-    private  Gender gender;
-    private  Integer age;
-    private  String email;
+    private final UUID userUid;
+    private final String firstName;
+    private final String lastName;
+    private final Gender gender;
+    private final Integer age;
+    private final String email;
 
-    public User(UUID userUid, String firstName, String lastName, Gender gender, Integer age, String email) {
+    public User(
+            @JsonProperty("userUid") UUID userUid,
+            @JsonProperty("firstName") String firstName,
+            @JsonProperty("lastName") String lastName,
+            @JsonProperty("gender") Gender gender,
+            @JsonProperty("age") Integer age,
+            @JsonProperty("email") String email) {
         this.userUid = userUid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -25,16 +33,24 @@ public class User {
         this.email = email;
     }
 
+
+
+    /*this one has to be in order to POST request (default constructor were needed).
+    Consequently, becouse of default contructor varieables could not be final
+    Deprecated -> use @JsonProperty
+
     public User() {
-    }
+    }*/
+
+
 
     public UUID getUserUid() {
         return userUid;
     }
 
-    public void setUserUid(UUID userUid) {
+/*    public void setUserUid(UUID userUid) {
         this.userUid = userUid;
-    }
+    }*/
 
     public String getFirstName() {
         return firstName;
@@ -54,6 +70,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public static User newUser(UUID userUid, User user) {
+        return new User(userUid, user.getFirstName(), user.getLastName(), user.getGender(), user.getAge(), user.getEmail() );
     }
 
     @Override
