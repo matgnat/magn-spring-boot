@@ -20,6 +20,7 @@ import static org.mockito.BDDMockito.given;
 /**
  * Created by magn on 4/12/2018.
  */
+
 public class UserServiceTest {
 
     @Mock
@@ -41,7 +42,7 @@ public class UserServiceTest {
         ImmutableList<User> fake_table_users = new ImmutableList.Builder<User>().add(test_user).build();
         given(fakeDataDao.selectAllUsers()).willReturn(fake_table_users);
 
-        List<User> allUsers = userService.getAllUsers();
+        List<User> allUsers = userService.getAllUsers(Optional.empty());
         assertThat(allUsers).hasSize(1);
 
         User baseUser = allUsers.get(0);

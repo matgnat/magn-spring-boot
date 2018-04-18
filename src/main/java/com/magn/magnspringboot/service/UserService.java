@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -23,7 +24,7 @@ public class UserService {
 
 
 
-
+    //TODO
     public List<User> getAllUsers(Optional<String> gender) {
         List<User> users = userDao.selectAllUsers();
         if (!gender.isPresent()) {
@@ -31,7 +32,15 @@ public class UserService {
         }
         try {
             Gender theGender = Gender.valueOf(gender.get());
-
+/*            for (int i = 0; i < users.size(); i++) {
+                User user = users.get(i);
+                if (user.getGender().equals(theGender)) {
+                    return (List<User>) user;
+                }
+            }*/
+            return users.stream()
+                    .filter(user -> user.getGender().equals(theGender))
+                    .collect(Collectors.toList());
         } catch (Exception e) {
              throw new IllegalStateException("invalid argument" + e);
         }
